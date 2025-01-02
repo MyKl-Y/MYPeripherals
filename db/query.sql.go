@@ -3,6 +3,8 @@
 //   sqlc v1.25.0
 // source: query.sql
 
+// db/query.sql.go
+
 package db
 
 import (
@@ -44,5 +46,31 @@ func (q *Queries) CreateMetrics(ctx context.Context, arg CreateMetricsParams) (M
 		&i.ScrollSteps,
 		&i.Timestamp,
 	)
+	return i, err
+}
+
+// Query for creating a keypress detail record
+const createKeypressDetail = `-- name: CreateKeypressDetail :exec
+INSERT INTO keypress_details (key, count)
+VALUES ($1, $2)
+`
+
+type CreateKeypressDetailParams struct {
+	Key   uint16 //string
+	Count int32
+}
+
+func (q *Queries) CreateKeypressDetail(ctx context.Context, arg CreateKeypressDetailParams) (KeypressDetail, error) {
+	row := q.db.QueryRowContext(ctx, createKeypressDetail, arg.Key, arg.Count)
+
+	var i KeypressDetail
+
+	err := row.Scan(
+		&i.ID,
+		&i.Key,
+		&i.Count,
+		&i.Timestamp,
+	)
+
 	return i, err
 }

@@ -2,6 +2,8 @@
 // versions:
 //   sqlc v1.25.0
 
+// db/models.go
+
 package db
 
 import (
@@ -16,4 +18,11 @@ type Metric struct {
 	MouseDistanceMi float64
 	ScrollSteps     int32
 	Timestamp       time.Time
+}
+
+type KeypressDetail struct {
+	ID        int32
+	Key       uint16 //string
+	Count     int32
+	Timestamp time.Time
 }

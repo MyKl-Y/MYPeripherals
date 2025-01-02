@@ -23,6 +23,6 @@ go.work.sum
 
 # env file
 .env*
-kawaiilogger
+MYPeripherals
 dist
 **/.DS_Store

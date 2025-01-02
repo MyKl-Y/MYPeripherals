@@ -2,6 +2,8 @@
 // versions:
 //   sqlc v1.25.0
 
+// db/db.go
+
 package db
 
 import (
